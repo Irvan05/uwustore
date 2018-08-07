@@ -1,0 +1,7 @@
+{
+  "name": "uwustore",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
