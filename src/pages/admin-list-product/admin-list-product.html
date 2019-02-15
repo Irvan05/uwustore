@@ -1,0 +1,36 @@
+<!--
+  Generated template for the AdminListProductPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Daftar Produk</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list [virtualScroll]="listAllItemCards">
+    <ion-item-sliding *virtualItem="let item">
+      <ion-item >
+        <ion-card class="productCard" (click)="productClicked(item)" >
+          <ion-item>
+              <ion-avatar item-start>
+                <img src="{{imageBasepath}}{{item.photo}}">
+              </ion-avatar>
+              <h2 text-wrap>{{item.name}}</h2>
+              <p *ngIf="item.stock>0"  style='color: #32db64;'>Stok ada</p>
+              <p *ngIf="item.stock==0"  style='color: orange;'>Stok habis</p>
+              <p>
+                  Harga: {{item.price | currency:"Rp. ":false:"1.0" }}
+              </p>
+          </ion-item>
+        </ion-card>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

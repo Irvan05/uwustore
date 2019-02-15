@@ -1,0 +1,25 @@
+page-rating {
+    .main{
+        position: absolute;
+        top: 0 !important;
+        left: 0 !important;
+        display: block;
+        height: 100% !important;
+        width: 100% !important;
+        overflow: hidden;
+    }
+    .orderCard{
+        display: block;
+        height: fit-content !important;
+        width: fill !important;
+    }
+    .cardContent{
+        height: 100%;
+        display: block;
+    }
+    .nama_item{
+    }
+    .rat_button{
+        width: auto;
+    }
+}

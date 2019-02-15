@@ -1,3 +1,144 @@
 page-home {
+    img.card-img {
+        height: 150px;
+        width: 150px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0%;
+    }
+    .ellipsis {
+        font-size: 16px;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        margin-left: 2px;
+        margin-right: 2px;
+        margin-top: 10%;
+        margin-bottom: 0px !important;
+        width: auto;
+        height: 40px;
+        flex-flow: column;
+        display: -webkit-box; 
+        -webkit-line-clamp: 2; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        line-height: 16px; 
+        max-height: 40px; 
+        -webkit-box-orient: vertical;
+        justify-content: center;
+        align-items: center;
+        //border: 1px solid #000000;
+      }
+      .ellipsis2 {
+          font-size: 16px;
+          padding-top: 0px !important;
+          padding-bottom: 0px !important;
+          padding-left: 0px !important;
+          padding-right: 0px !important;
+          margin-left: 2px;
+          margin-right: 2px;
+          margin-top: 0%;
+          margin-bottom: 0px !important;
+          width: auto;
+          height: 40px;
+          flex-flow: column;
+          display: -webkit-box; 
+          -webkit-line-clamp: 2; 
+          overflow: hidden; 
+          text-overflow: ellipsis; 
+          line-height: 16px; 
+          max-height: 39px; 
+          -webkit-box-orient: vertical;
+          justify-content: center;
+          align-items: center;
+          text-align: left;
+          //border: 1px solid #000000;
+        }
+      .beli_row{
+        width: auto; 
+        height: auto; 
+        margin-top: -5%;
+      }
+      .beli_row2{
+        width: auto; 
+        height: auto; 
+        margin-top: -5%;
+        margin-left: 0%;
+      }
+      //overflow: hidden; text-overflow: ellipsis; line-height: 16px; max-height: 7vh; -webkit-box-orient: vertical;"
+    .card_header{
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        display: -webkit-box; 
+        -webkit-line-clamp: 2; 
+        line-height: 16px; 
+        max-height: 32px; 
+        -webkit-box-orient: vertical;
+    }
+    .product_grid{
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+    ion-scroll.less-padding{
+        margin-left: 0% !important;
+        margin-right: 0% !important;
+    }
+    ion-header.content-ios{
+      ion-row[wrap] {
+        ion-col {
+          flex-basis: 100%;
+        }
+      }
+    }
 
+    /*fix for ios*/
+    @media (max-width: 768px) {
+        ion-header.content-ios{
+        ion-row[wrap] {
+            ion-col {
+            flex-basis: 50%;
+            }
+        }
+        }
+    }
+    @media (max-width: 476px) {
+        ion-header.content-ios{
+        ion-row[wrap] {
+            ion-col {
+            flex-basis: 100%;
+            }
+        }
+        }
+    }
+}
+
+
+
+#notifications-badge {
+    background-color: red;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    border-radius: 100%;
+}
+
+.scroll-zoom-wrapper {
+    white-space: nowrap;
+}
+
+ion-card {
+    width: 150px !important;
+    height: auto !important;
+    display: inline-block;
+}
+
+
+ion-scroll {
+    min-height: 250px; 
+    height: auto;
+        .scroll-content {
+        padding: 0px !important;
+    }    
 }

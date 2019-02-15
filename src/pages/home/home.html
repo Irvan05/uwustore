@@ -1,14 +1,135 @@
-<ion-header>
-  <ion-navbar>
+<ion-header no-padding>
+  <ion-navbar color="primary">
     <ion-title>
-      Ionic Blank
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <button style="background-color:rgb(52, 130, 202); width: 100%;" (click)="openBrowseProductPage(listAllItemCards)" ion-button full icon-start>
+              <ion-icon name="basket"></ion-icon>
+              Belanja Sekarang
+            </button>
+          </ion-col>
+          <ion-col col-2>
+              <button (click)="cartButtonClicked()" style="background-color:rgb(52, 130, 202); width: 100%;" ion-button full>
+                <div>
+                    <ion-icon name="basket" style="margin-top:5px;">
+                      <ion-badge id="notifications-badge" color="danger">{{itemCount}}</ion-badge>
+                    </ion-icon>
+                </div>
+                
+                
+              </button>
+          </ion-col>
+        </ion-row>
+          
+      </ion-grid>
+      
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+<ion-content no-padding>
+  
+  <!-- <div padding>
+    <button style="background-color:rgb(52, 130, 202); width: 100%;" (click)="openBrowseProductPage()" ion-button icon-start>
+      <ion-icon name="basket"></ion-icon>
+      Belanja Sekarang
+    </button>
+  </div> -->
+  <div class='no-padding' >
+    <button col-12 ion-button (click)="openBrowseProductPage(listCards)" clear small color="secondary">
+      <h3 style='margin-left: 10px; margin-top: 8px;'>
+          Rekomendasi untuk anda
+      </h3>
+    </button>
+    <ion-scroll padding  scrollX="true" direction="x">
+      <ion-card *ngFor="let item of listCards | slice:0:50;">
+        <ion-card-header no-padding style='background-color: rgb(214, 214, 214)'>
+          <img no-padding (click)="itemCardClick(item)" src="{{imageBasepath}}{{item.photo}}" class="card-img"/>
+        </ion-card-header>
+        
+
+          <ion-card-content no-padding style="margin-top:-10%;">
+            <ion-card-title no-padding >
+              <p class="ellipsis" text-wrap>
+                {{ item.name }}
+              </p>
+            </ion-card-title>
+              <!-- <ion-col col-4>
+                  <p style='font-size: 12px;'>
+                    {{item.cart_count==0 ? ' ' : item.cart_count}}
+                  </p>
+              </ion-col> -->
+            <ion-grid no-padding class="product_grid">
+              <ion-row no-padding>
+                  <p style="color: rgb(255, 0, 0);">
+                      {{item.price | currency:"Rp ":false:"1.0" }}
+                  </p>
+              </ion-row>
+              <ion-row no-padding class="beli_row">
+                <ion-col no-padding col-6 style='color: orange; margin-top: 0.8vh;'>
+                    {{item.stock==0 ? 'Habis' : 'Tersedia'}}
+                </ion-col>
+                <ion-col no-padding col-6>
+                  <button col-12 ion-button (click)="buyClicked(item)" clear small color="secondary" icon-start>
+                    <ion-icon name='cart'></ion-icon>
+                    Beli
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+      </ion-card>
+      
+    </ion-scroll>
+  </div>
+  <div class='no-padding'>
+    <ion-grid no-padding justify-content-center>
+      <ion-row>
+        <ion-col col-12>
+          <button col-12 ion-button (click)="openBrowseProductPage(listAllItemCards)" clear small color="black"  >
+            <h3 style='margin-left: 10px; margin-top: 13px;'>
+              Produk terbaru
+            </h3>
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row text-center>
+        <ion-col>
+          <!-- <ion-scroll class="less-padding" no-padding scrollX="true" direction="x"> -->
+            <ion-card *ngFor="let item of listAllItemCards | slice:0:15;">
+
+              <img (click)="itemCardClick(item)" src="{{imageBasepath}}{{item.photo}}"/>
+
+              <ion-card-content no-padding>
+                <ion-card-title no-padding >
+                  <p class="ellipsis2">
+                    {{ item.name }}
+                  </p>
+                  </ion-card-title>
+                  <ion-grid no-padding class="product_grid">
+                  <ion-row no-padding>
+                      <p style="color: rgb(255, 0, 0);">
+                          {{item.price | currency:"Rp ":false:"1.0" }}
+                      </p>
+                  </ion-row>
+                  <ion-row no-padding class="beli_row2">
+                    <ion-col no-padding col-6 style='color: orange; text-align: left; margin-top: 0.8vh; margin-left: 0px;'>
+                        {{item.stock==0 ? 'Habis' : 'Tersedia'}}
+                    </ion-col>
+                    <ion-col no-padding col-6>
+                      <button col-12 ion-button (click)="buyClicked(item)" clear small color="secondary" icon-start>
+                        <ion-icon name='cart'></ion-icon>
+                        Beli
+                      </button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          <!-- </ion-scroll> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>     

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "463333433132",
+    "firebase_url": "https://uwustore-d73af.firebaseio.com",
+    "project_id": "uwustore-d73af",
+    "storage_bucket": "uwustore-d73af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463333433132:android:f27cb382d8d3fa11",
+        "android_client_info": {
+          "package_name": "com.uwustore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463333433132-g6bvj4qfga65ftgt4k92l25rt5jp0b0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQJsdr17rMCAnfzhuUPDdESIAu_cMIwnA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

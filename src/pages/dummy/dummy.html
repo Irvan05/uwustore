@@ -1,0 +1,78 @@
+<!--
+  Generated template for the DummyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>dummyPage</ion-title>
+  </ion-navbar>
+  <button ion-button (click)="dismiss()">
+    kembali
+  </button>
+    <button style="background-color:rgb(52, 130, 202);" ion-button>
+      <div>
+          <ion-icon name="basket" style="margin-top:5px;">
+            <ion-badge id="notifications-badge" color="danger"></ion-badge>
+          </ion-icon>
+      </div>
+      
+      
+    </button>
+</ion-header>
+
+
+<ion-content no-padding>
+
+  <ion-grid no-padding justify-content-center>
+    <ion-row justify-content-center text-center>
+      <ion-col justify-content-center>
+      <!-- <div col-12 col-xl-2 col-lg-3 col-md-4 justify-content-center>  -->
+        <ion-card *ngFor="let item of listAllItemCards">
+
+          <img src="http://www.kroptokon.com/uploads/{{item.photo}}" class="card-img" />
+      
+            <ion-card-content>
+              <ion-row>
+                <ion-col>
+                    <ion-card-title style='font-size: 12px;'>
+                        {{ item.name }}
+                    </ion-card-title>
+                </ion-col>
+                <!-- <ion-col col-4>
+                    <p style='font-size: 12px;'>
+                      {{item.cart_count==0 ? ' ' : item.cart_count}}
+                    </p>
+                </ion-col> -->
+              </ion-row>
+              <p style='margin-top: -9px;'>
+                  {{ item.description }}
+              </p>
+      
+              <ion-row style='width: auto; height: 20px; margin-top: -15%; margin-left: -25%'>
+                <ion-col col-6>
+                  <button ion-button clear small color="secondary" icon-start>
+                    <ion-icon name='star-outline'> favorit</ion-icon>
+                  </button>
+                </ion-col>
+                
+                <ion-col col-6>
+                  <button ion-button clear small color="secondary" icon-start>
+                    <ion-icon name='cart'></ion-icon>
+                    Beli
+                  </button>
+                </ion-col>
+                
+              </ion-row>
+            </ion-card-content>
+        </ion-card>
+      <!-- </div> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
+
+</ion-content>

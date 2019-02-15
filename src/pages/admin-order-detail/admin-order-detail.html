@@ -1,0 +1,58 @@
+<!--
+  Generated template for the AdminOrderDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar  color="primary">
+    <ion-title>Order Detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of listOrderDetail">
+        <ion-item>
+            <ion-row>
+              <ion-col col-5>
+                  <img src="{{imageBasepath}}{{item.photo}}" />
+              </ion-col>
+              <ion-col col-7>
+                <ion-row class="prod_name" text-wrap>
+                  {{item.name}}
+                </ion-row>
+                <ion-row style="color:red; margin-top: 8px; border-bottom: 1px solid rgba(121, 121, 121, 0.356) !important;">
+                    {{item.price | currency:"Rp ":false:"1.0" }}
+                </ion-row>
+                <ion-row style="margin-top: 8px; color: #32db64">
+                    <ion-icon style="margin-right:10px;" name='cart'></ion-icon>
+                    {{item.qty}}
+                </ion-row>
+              </ion-col>
+            </ion-row>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row >
+      <ion-col col-3 class="bot_col">
+          Total :
+      </ion-col>
+      <ion-col class="bot_col" style="color:red;" >
+        {{orderData.total_price | currency:"Rp ":false:"1.0"}}
+      </ion-col>
+      <ion-col>
+          <button *ngIf="orderData.status=='pending'"  color="secondary" ion-button (click)="tanggapiClick()">Tanggapi</button>
+          <h6 *ngIf="orderData.status=='terkirim'"  style='color: #32db64;;'>Sudah Dikirim</h6>
+          <h6 *ngIf="orderData.status=='gagal'"  style='color: red;'>Stok habis</h6>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

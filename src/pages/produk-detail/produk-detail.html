@@ -1,0 +1,60 @@
+<!--
+  Generated template for the ProdukDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="primary" class='bar'>
+        <ion-row>
+          <button ion-button clear icon-only style="display: block !important; color: white;" (click)="dismiss()">
+              <ion-icon name="arrow-back"></ion-icon>
+          </button>
+         <ion-title>Detail Produk</ion-title>
+      </ion-row>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content style=' display: inline-block; background-color: rgb(255, 255, 255);'>
+  <div no-padding style="background-color: rgb(235, 235, 235);">
+    <img class='bannerPic' src="{{imageBasepath}}{{item.photo}}"/>
+  </div>
+  <div padding class="detail_div">
+    <h1>
+      {{item.name}}
+    </h1>
+    <h3 style="border-bottom: 1px solid grey !important; color: rgb(255, 0, 0);">
+      {{item.price | currency:"Rp. ":false:"1.0" }}
+    </h3>
+    <h6 style='color: orange'>
+      {{item.stock>0 ? "Tersedia" : 'Stok barang habis'}}
+    </h6>
+    <p class="description">
+      {{item.description}}
+    </p>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button round outline small color="secondary" (click)="buyClicked()" >
+            Tambah ke keranjang
+        </button>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button clear small color="secondary" icon-start>
+          <ion-icon name='cart'></ion-icon>
+            {{item.cart_count}}
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button block small color="secondary" (click)="dismiss()">
+          kembali
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

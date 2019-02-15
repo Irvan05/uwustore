@@ -1,0 +1,20 @@
+page-edit-photo {
+    .cropper{
+        position: absolute;
+        top: 0 !important;
+        left: 0 !important;
+        display: block;
+        height: fill !important;
+        width: fill !important;
+        overflow: hidden;
+    }
+    .main{
+        position: absolute;
+        top: 0 !important;
+        left: 0 !important;
+        display: block;
+        height: 100% !important;
+        width: 100% !important;
+        overflow: hidden;
+    }
+}

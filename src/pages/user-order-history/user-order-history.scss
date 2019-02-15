@@ -1,0 +1,20 @@
+page-user-order-history {
+    .main{
+        position: absolute;
+        top: 0 !important;
+        display: block;
+        height: 100% !important;
+        width: 100% !important;
+        overflow: hidden;
+        background-color:rgb(235, 235, 235);
+    }
+    .orderCard{
+        display: block;
+        height: fit-content !important;
+        width: fill !important;
+    }
+    .item_name{
+        margin-top: 0%;
+        margin-bottom: 5px;
+    }
+}

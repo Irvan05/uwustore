@@ -1,0 +1,49 @@
+<!--
+  Generated template for the DummyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-row>
+      <button ion-button clear icon-only style="display: block !important; color: white;" (click)="dismiss()">
+          <ion-icon name="arrow-back"></ion-icon>
+      </button>
+      <ion-title>
+          RATING SAYA
+      </ion-title>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content style="width: 100%;" padding>
+
+  <ion-list *ngFor="let item of listItem">
+    <ion-item-sliding>
+      <ion-item>
+        <ion-card class="orderCard">
+          <ion-item>
+              <ion-avatar item-start>
+                <img src="{{imageBasepath}}{{item.photo}}">
+              </ion-avatar>
+              <h2 text-wrap class="nama_item">{{item.name}}</h2>
+          </ion-item>
+          <ion-card-content class="cardContent">
+            <ion-row>
+              <button ion-button color="secondary" col-2 class="rat_button" *ngFor="let num of item.starCount" >
+                <ion-icon name="star" (click)="getRating(num, item)" ></ion-icon>
+              </button>
+              <button ion-button color="light" col-2 class="rat_button" *ngFor="let num of item.starOutlineCount" >
+                <ion-icon name="star-outline" (click)="getRating(num, item)" ></ion-icon>
+              </button>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

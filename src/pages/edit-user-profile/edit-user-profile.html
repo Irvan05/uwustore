@@ -1,0 +1,86 @@
+<!--
+  Generated template for the EditUserProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Ganti Informasi User</ion-title>
+  </ion-navbar>
+  <!-- <button ion-button (click)="dismiss()">
+    kembali
+  </button> -->
+</ion-header>
+
+
+<ion-content style="width: 100%;" no-padding>
+
+  
+  <form [formGroup]="userForm" (ngSubmit)="userFormSubmit()">
+    <ion-card class="infoCard">
+      <ion-card-header>
+          Edit informasi dasar
+      </ion-card-header>
+      <ion-card-content>
+          <!-- <ion-item>
+            <button ion-button round (click)="usernameEditable()">{{usernameEdit==false ? 'Batal' : 'Edit Username'}}</button>
+          </ion-item> -->
+          <ion-item>
+            <ion-label floating>Username : {{userData.name}}</ion-label>
+            <ion-input type="text" formControlName="nama" value="{{userData.name}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Email : {{userData.email}}</ion-label>
+            <ion-input type="text" formControlName="email" value="{{userData.email}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Nomor Telepon : {{userData.telepon}}</ion-label>
+            <ion-input type="text" formControlName="telepon" value="{{userData.telepon}}"></ion-input>
+          </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="infoCard">
+      <ion-card-header>
+        Edit alamat rumah
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label stacked>Alamat Rumah</ion-label>
+          <ion-textarea type="text" formControlName="alamat" value="{{userData.alamat}}"></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="infoCard">
+      <ion-card-header>
+        Edit Password
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label stacked>Password</ion-label>
+          <ion-input placeholder="alfanumerik minimal 6 karakter" type="password" formControlName="editPassword"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Konfirmasi Password</ion-label>
+          <ion-input placeholder="alfanumerik minimal 6 karakter" type="password" formControlName="confirmEditPassword"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card class="infoCard">
+      <ion-card-header>
+        Konfirmasi Data
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Password saat ini</ion-label>
+          <ion-input type="password" formControlName="currentPassword"></ion-input>
+        </ion-item>
+        <button ion-button [disabled]="!userForm.valid" type="submit">Submit</button>
+      </ion-card-content>
+    </ion-card>
+    
+  </form>
+  
+  </ion-content>

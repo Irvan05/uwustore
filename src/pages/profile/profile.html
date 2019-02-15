@@ -1,0 +1,106 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Menu Utama</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+  <section class="login_form" *ngIf="belumLogin=='true'">
+    <form [formGroup]="loginForm" (ngSubmit)="logForm()">
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <button class="submit_button" ion-button type="submit" [disabled]="!loginForm.valid">Login</button>
+
+    </form>
+  </section>
+  
+  <section >
+    <ion-list *ngIf="belumLogin=='false'">
+      <button ion-item (click)="openUserOrderHistoryPage()" icon-right>
+        Lihat status pesanan
+        <ion-icon name="arrow-forward"  item-right></ion-icon>
+      </button>
+      <button ion-item (click)="openRatingPage()" icon-right> 
+          Review rating produk
+          <ion-icon name="arrow-forward"  item-right></ion-icon>
+      </button>
+      <button ion-item (click)="openEditUserPage()" icon-right>
+          Edit profil
+          <ion-icon name="arrow-forward"  item-right></ion-icon>
+      </button>
+    </ion-list>
+
+    <ion-list *ngIf="belumLogin=='admin'">
+      <button ion-item (click)="openTambahProdukPage()"icon-right>
+          Tambah produk
+        <ion-icon name="arrow-forward"  item-right></ion-icon>
+      </button>
+      <button ion-item (click)="openEditProductPage()" icon-right> 
+          Edit Produk
+          <ion-icon name="arrow-forward"  item-right></ion-icon>
+      </button>
+      <button ion-item (click)="openEditUserPage()" icon-right>
+          Edit profil
+          <ion-icon name="arrow-forward"  item-right></ion-icon>
+      </button>
+    </ion-list>
+
+    <button *ngIf="belumLogin!='true'" ion-button (click)="logout()">Logout</button>
+    <!-- <button *ngIf="belumLogin=='admin'" ion-button (click)="openTambahProdukPage()">Tambah produk</button> -->
+    <!-- <button *ngIf="belumLogin=='admin'" ion-button (click)="openAdminOrderListPage()">Liat Pesanan</button> -->
+    <!-- <button *ngIf="belumLogin=='admin'" ion-button (click)="openEditProductPage()">Edit Produk</button> -->
+    <!-- <button *ngIf="belumLogin=='false'" ion-button (click)="openUserOrderHistoryPage()">Liat Pesanan</button> -->
+    <!-- <button *ngIf="belumLogin=='false'" ion-button (click)="openRatingPage()">Rating Saya</button> -->
+    <!-- <button *ngIf="belumLogin=='false'" ion-button (click)="openEditUserPage()">Edit User Detail</button> -->
+  </section>
+
+<!-- <ion-card>
+  <ion-card-header>
+    Response
+  </ion-card-header>
+
+  <ion-card-content>
+    <b>{{asd.response}}</b>
+  </ion-card-content>
+</ion-card> -->
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar >
+    <ion-row >
+      <ion-col col-12 style="align-items: center; text-align: center;">
+        <button  middle ion-button clear small color="primary" (click)="openAboutApp()">
+            Tentang Aplikasi
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="belumLogin=='true'">
+      <ion-col col-8>
+        <h6 style="vertical-align: middle;">
+            Belum punya akun?
+        </h6>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button clear small color="secondary" (click)="openRegisterPage()">
+            Daftar
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

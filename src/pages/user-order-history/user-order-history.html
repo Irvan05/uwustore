@@ -1,0 +1,87 @@
+<!--
+  Generated template for the UserOrderHistoryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Riwayat Pembelian</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div>
+    <h5 style="color: orange">
+      Barang yang tidak diberi rating selama 3 hari akan mendapat rating 5 bintang
+    </h5>
+  </div>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+  <ion-list [virtualScroll]="listOrder">
+    <ion-item-sliding *virtualItem="let item">
+        <ion-item >
+            <ion-card class="orderCard">
+                <ion-card-header no-padding style="border-bottom: 1px solid rgba(121, 121, 121, 0.356) !important;">
+                  <ion-grid >
+                    <ion-row>
+                      <ion-col col-12>
+                        <ion-row class="item_name" text-wrap>
+                            <h2>{{item.name}}</h2>
+                        </ion-row>
+                        <ion-row style="color: orange" *ngIf="item.status=='pending'" >
+                            Pending
+                        </ion-row>
+                        <ion-row style="color: red" *ngIf="item.status=='gagal'">
+                            Stok Habis
+                        </ion-row>
+                        <ion-row style="color: #32db64" *ngIf="item.status=='terkirim'">
+                            Sudah Dikirim
+                        </ion-row>
+                      </ion-col>
+                      <!-- <ion-col col-2>
+                        <button *ngIf="item.status=='terkirim'" (click)="cardOption(item)" ion-button clear>
+                          <ion-icon name="more"></ion-icon>
+                        </button>
+                      </ion-col> -->
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+                <ion-card-content no-padding>
+                  <ion-item>
+                      <h2>{{item.order_date | date:'dd/MMM/yyyy H:m:s'}}</h2>
+                      <ion-row>
+                        <ion-col col-3>Total :</ion-col>
+                        <ion-col col-9>Rp {{item.total_price | number:"1.0-0" }}</ion-col>
+                      </ion-row>
+                  </ion-item>
+                  <ion-row no-padding>
+                    <ion-col col-6 no-padding>
+                        <button (click)="openUserOrderDetailPage(item)"  color="secondary" ion-item block outline text-center>
+                          Order Detail
+                        </button>
+                    </ion-col>
+                    <ion-col col-6 no-padding>
+                      <button [disabled]="item.status!='terkirim'" (click)="openRatingPage(item)" color="primary" ion-item block outline text-center>
+                        Beri Rating
+                      </button>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+                
+              </ion-card>
+        </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+  
+</ion-content>
