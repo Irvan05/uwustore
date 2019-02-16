@@ -33,7 +33,7 @@ export class BrowseProductPage {
   listFiltereditemCardsCategory:Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>=[] ;
   listFiltereditemCardsName:Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>=[] ;
   itemCount:number;
-  listItemCart:Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>=[];
+  listItemCart:any;
   
   callback:any;
 
@@ -59,6 +59,9 @@ export class BrowseProductPage {
       return;
     }
 
+    if(this.itemCount==0){
+      this.listItemCart=new Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>();
+    }
     if(this.itemCount!=0 && this.isItemExist(this.listItemCart, item)){
       var updateItem=this.listItemCart.find(data=> data.id_product==item.id_product);
       var index=this.listItemCart.indexOf(updateItem);
@@ -67,7 +70,7 @@ export class BrowseProductPage {
     }
     else{
       item.cart_count++;
-      this.listItemCart.push(item);
+      this.listItemCart.unshift(item);
       console.log("item clicked count :"+item.cart_count);
     }
 
@@ -89,6 +92,9 @@ export class BrowseProductPage {
 
   itemCardClick(item){
     //this.navCtrl.push(ProdukDetailPage, {item});
+    if(this.itemCount==0){
+      this.listItemCart=new Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>();
+    }
     var updateItem=this.listItemCart.find(data=> data.id_product==item.id_product);
     //console.log("searching update item");
     //console.log(updateItem);

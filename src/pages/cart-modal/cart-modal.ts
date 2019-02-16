@@ -125,6 +125,7 @@ export class CartModalPage {
           this.asd = data["_body"];
           // console.log('recieve data post modal :');
           // console.log(recieved_data);
+          alert("Pesanan anda akan diproses");
           this.dismissConfirmBuy();
       },
       (error: any) => {

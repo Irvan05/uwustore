@@ -23,7 +23,8 @@ export class HomePage {
   listCards:Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>=[] ;
   listAllItemCards:Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>=[] ;
   itemCount:number;
-  listItemCart:Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>=[];
+  // listItemCart:Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>=[];
+  listItemCart:any;
   //listOrder:Array<any>;
   //orderCount:number=0;
   returnDataPop:any;
@@ -75,8 +76,10 @@ export class HomePage {
     //   var index=this.listItem.indexOf(updateItem);
     //   this.listItem[index].cart_count++;
     // }
-
-    if(this.itemCount!=0 && this.isItemExist(this.listItemCart, item)){
+    if(this.itemCount==0){
+      this.listItemCart=new Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>();
+    }
+    if(this.itemCount!=0 &&this.isItemExist(this.listItemCart, item)){
       var updateItem=this.listItemCart.find(data=> data.id_product==item.id_product);
       var index=this.listItemCart.indexOf(updateItem);
       this.listItemCart[index].cart_count++;
@@ -85,8 +88,15 @@ export class HomePage {
     }
     else{
       item.cart_count=1;
-      this.listItemCart.push(item);
-      console.log("item clicked count :"+item.cart_count);
+      // this.listItemCart.push(item);
+      // this.listItemCart=new Array<item>
+      // this.listItemCart=new Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>();
+      this.listItemCart.unshift(item);
+      // this.listItemCart.splice(0, 0, item);
+      // console.log("item clicked count :"+item.cart_count);
+      // console.log(item);
+      // console.log("listItemCart :");
+      // console.log(this.listItemCart);
     }
     //item.cart_count=0;
     this.itemCount++;
@@ -265,6 +275,9 @@ export class HomePage {
 
   itemCardClick(item){
     //this.navCtrl.push(ProdukDetailPage, {item});
+    if(this.itemCount==0){
+      this.listItemCart=new Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>();
+    }
     var updateItem=this.listItemCart.find(data=> data.id_product==item.id_product);
     // console.log("searching update item");
     // console.log(updateItem);
@@ -338,6 +351,7 @@ export class HomePage {
 
   ionViewWillEnter() {
     console.log("re enter home");
+    // this.deleteElementEmpty();
     // this.listAllItemCards.sort(function(a, b) {
     //   return b.id_product - a.id_product;
     // });

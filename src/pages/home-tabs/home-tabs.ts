@@ -3,7 +3,7 @@ import { AdminOrderListPage } from './../admin-order-list/admin-order-list';
 import { ProfilePage } from './../profile/profile';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, Keyboard } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 
 /**
@@ -22,21 +22,24 @@ import { RemoteServiceProvider } from '../../providers/remote-service/remote-ser
 export class HomeTabsPage {
   homePage:any=HomePage;
   profilePage=ProfilePage;
+  // keyboardHide:boolean=true;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private provider:RemoteServiceProvider,
     private backgroundMode: BackgroundMode,
+    private keyboard: Keyboard,
     private platform: Platform) {
     // this.platform.ready().then((result) => {
-    //   this.platform.registerBackButtonAction(fn=>{
-    //     console.log("back pressed");
-    //     this.backgroundMode.moveToBackground();
-    //   });
-      
+    //   if(this.keyboard.isOpen()){
+    //     this.keyboardHide=true;
+    //   }else{
+    //     this.keyboardHide=false;
+    //   }
     // }).catch((err) => {
       
     // });
+
   }
 
   ionViewDidLoad() {
@@ -56,8 +59,8 @@ export class HomeTabsPage {
     });
   }
 
-  homeRefresh(){
+  // homeRefresh(){
     
-  }
+  // }
 
 }
