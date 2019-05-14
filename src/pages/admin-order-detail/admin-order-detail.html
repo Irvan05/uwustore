@@ -22,6 +22,11 @@
                   <img src="{{imageBasepath}}{{item.photo}}" />
               </ion-col>
               <ion-col col-7>
+                <!-- <ion-row *ngIf="orderData.status=='pending'">
+                  <button (click)="editItem(item)" ion-button color="secondary" class="editItemButton">
+                    <ion-icon name="create"></ion-icon>
+                  </button>
+                </ion-row> -->
                 <ion-row class="prod_name" text-wrap>
                   {{item.name}}
                 </ion-row>
@@ -29,10 +34,28 @@
                     {{item.price | currency:"Rp ":false:"1.0" }}
                 </ion-row>
                 <ion-row style="margin-top: 8px; color: #32db64">
+                  <ion-col *ngIf="orderData.status=='pending'">
+                    <button (click)="removeItem(item)" ion-button color="secondary" class="editItemBottom">
+                      <ion-icon name="remove"></ion-icon>
+                    </button>
+                  </ion-col>
+                  <ion-col>
                     <ion-icon style="margin-right:10px;" name='cart'></ion-icon>
                     {{item.qty}}
+                  </ion-col>
+                  <ion-col *ngIf="orderData.status=='pending'">
+                    <button (click)="addItem(item)" ion-button color="secondary" class="editItemBottom">
+                      <ion-icon name="add"></ion-icon>
+                    </button>
+                  </ion-col>
                 </ion-row>
               </ion-col>
+            </ion-row>
+            <ion-row *ngIf="orderData.status=='pending'">
+              <button (click)="editItem(item)" ion-button color="secondary" class="editItemButton">
+                <ion-icon name="create"></ion-icon>
+                   Ubah atau Edit Produk
+              </button>
             </ion-row>
         </ion-item>
       </ion-item-sliding>

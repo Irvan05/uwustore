@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Platform } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 
 /**
@@ -26,11 +26,16 @@ export class RatingPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private provider: RemoteServiceProvider,
+    private platform: Platform,
     public viewCtrl: ViewController) {
     this.order=navParams.get('orderData');
     // console.log("isi orderData di modal");
     // console.log(this.order);
     this.imageBasepath=provider.getImageBasepath();
+    this.platform.registerBackButtonAction(fn=>{
+      console.log("back pressed");
+      this.dismiss();
+    });
   }
 
   getRating(num, item){

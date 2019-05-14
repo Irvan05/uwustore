@@ -1,11 +1,10 @@
 import { FormControl } from '@angular/forms';
-import { AdminEditProductPage } from './../admin-edit-product/admin-edit-product';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 
 /**
- * Generated class for the AdminListProductPage page.
+ * Generated class for the AdminSwapProductPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,11 +12,11 @@ import { RemoteServiceProvider } from '../../providers/remote-service/remote-ser
 
 @IonicPage()
 @Component({
-  selector: 'page-admin-list-product',
-  templateUrl: 'admin-list-product.html',
+  selector: 'page-admin-swap-product',
+  templateUrl: 'admin-swap-product.html',
   providers:[RemoteServiceProvider]
 })
-export class AdminListProductPage {
+export class AdminSwapProductPage {
   listAllItemCards:Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>=[] ;
   listAllItemCardsSearch:Array<{id_product:number, name:string, price:number, description:string, category:string, stock:number, photo:string, cart_count:number}>=[] ;
 
@@ -29,6 +28,7 @@ export class AdminListProductPage {
 
   constructor(public navCtrl: NavController, 
     private provider: RemoteServiceProvider,
+    private viewCtrl:ViewController,
     public navParams: NavParams) {
       this.searchControl = new FormControl();
       this.imageBasepath=this.provider.getImageBasepath();
@@ -68,8 +68,12 @@ export class AdminListProductPage {
   }
 
   productClicked(item){
-    console.log("product clicked");
-    this.navCtrl.push(AdminEditProductPage,{"data":item});
+    console.log(item);
+    this.viewCtrl.dismiss(item);
+  }
+
+  dismiss(){
+    this.viewCtrl.dismiss();
   }
 
   setFilteredItemsName() {

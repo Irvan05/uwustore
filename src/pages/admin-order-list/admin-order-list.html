@@ -9,7 +9,7 @@
   <ion-navbar color="primary">
     <ion-title>Order List</ion-title>
   </ion-navbar>
-  <button ion-button (click)="orderCustom()" >{{isDefaultListHidden ? 'lihat semua pesanan' : 'lihat pesanan belum terkirim'}}</button>
+  <button ion-button (click)="orderCustom()" >{{isDefaultListHidden ? 'lihat pesanan belum terkirim' : 'lihat semua pesanan'}}</button>
   <!-- <button ion-button (click)="cancelCustom()" >Cancel</button> -->
 </ion-header>
 
@@ -26,7 +26,7 @@
       </ion-refresher-content>
     </ion-refresher>
 
-    <ion-list [hidden]="isCustomListHidden" [virtualScroll]="listOrder">
+    <ion-list [hidden]="isDefaultListHidden" [virtualScroll]="listOrder">
         <ion-item-sliding *virtualItem="let item">
           <ion-item *ngIf="item.status=='pending'">
               <ion-card class="orderCard">
@@ -56,6 +56,10 @@
                     </ion-grid>
                   </ion-card-header>
                   <ion-card-content no-padding>
+                    <ion-item style="border-bottom: 1px solid rgba(121, 121, 121, 0.356) !important;">
+                        <a href="https://api.whatsapp.com/send?phone=62{{item.phone|slice:1:20}}"><h2>{{item.phone}}</h2></a>
+                        <p>{{item.address}}</p>
+                    </ion-item>
                     <ion-item>
                         <h2>{{item.order_date | date:'dd/MMM/yyyy H:mm:ss'}}</h2>
                         <ion-row>
@@ -73,7 +77,7 @@
         </ion-item-sliding>
       </ion-list>
 
-  <ion-list [hidden]="isDefaultListHidden" [virtualScroll]="listOrder">
+  <ion-list [hidden]="isCustomListHidden" [virtualScroll]="listOrder">
     <ion-item-sliding *virtualItem="let item">
       <ion-item >
           <ion-card class="orderCard">
@@ -103,7 +107,11 @@
                 </ion-grid>
               </ion-card-header>
               <ion-card-content no-padding>
-                <ion-item>
+                <ion-item style="border-bottom: 1px solid rgba(121, 121, 121, 0.356) !important;">
+                    <a href="https://api.whatsapp.com/send?phone={{item.phone}}"><h2>{{item.phone}}</h2></a>
+                    <p>{{item.address}}</p>
+                </ion-item>
+                <ion-item >
                     <h2>{{item.order_date | date:'dd/MMM/yyyy H:m:s'}}</h2>
                     <ion-row>
                       <ion-col col-3>Total :</ion-col>

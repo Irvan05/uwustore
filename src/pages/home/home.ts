@@ -10,6 +10,7 @@ import { CartModalPage } from './../cart-modal/cart-modal';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { Observable } from 'rxjs';
+import { RatingPage } from '../rating/rating';
 
 @Component({
   selector: 'page-home',
@@ -29,6 +30,8 @@ export class HomePage {
   //orderCount:number=0;
   returnDataPop:any;
   imageBasepath:string;
+
+  showRatingPage:boolean=false;
 
   myCallbackFunction = (_params1, _params2) => {
     return new Promise((resolve, reject) => {
@@ -239,10 +242,10 @@ export class HomePage {
         // console.log(result);
         myData=JSON.stringify({
           id_customer: result.id_customer});
-        
+        this.checkZeroRating(myData);
         this.provider.getUserRecommendation(myData).toPromise().then(result=>{
-          // console.log("result promise recommendation");
-          // console.log(result);
+          console.log("result promise recommendation");
+          console.log(result);
           this.listCards=JSON.parse(result["_body"]);
         }).catch(error=>{
           console.error('An error occurred', error);
@@ -256,6 +259,31 @@ export class HomePage {
       });
       
     }
+  }
+
+  checkZeroRating(myData){
+    this.provider.getAllUserRating(myData).toPromise().then(data=>{
+      console.log("rating check");
+      if(data["_body"]=='failed'){
+        //alert("Belum ada produk yang dibeli");
+        return;
+      }
+      var listRating =JSON.parse(data["_body"]);
+      console.log(listRating);
+      listRating.forEach(element => {
+        console.log(element.rating);
+          if(element.rating==0&&this.showRatingPage==false){
+            var ratingModal = this.modalCtrl.create(RatingPage, { orderData: "all"});
+            ratingModal.present();
+            this.showRatingPage=true;
+            // break;
+            // return;
+          }
+      });
+      // console.log("data rating:");
+      // console.log(this.listItem);
+    })//.catch(this.handleError);
+    
   }
 
   openBrowseProductPage(listKirim){
@@ -359,15 +387,16 @@ export class HomePage {
       console.log("return provider");
       // console.log(res);
       this.belumLogin=res;
+      this.showRatingPage=false;
       console.log('belum login: ', this.belumLogin);
       if(this.belumLogin=="admin"){
         this.navCtrl.setRoot(AdminOrderListPage);
         //this.navCtrl.parent.select(0); 
         //this.timerLoop();
       }
-      else
+      else{
         this.getMainPageContent();
-      
+      }
       this.getAllProductHome();
     }).catch((err) => {
       console.log("error"+err);

@@ -7,14 +7,24 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Daftar Produk</ion-title>
+    <ion-row>
+        <ion-col col-10>
+            <ion-searchbar placeholder="Cari Produk"
+              [(ngModel)]="searchTerm"
+              [formControl]="searchControl"
+              (ionFocus)="searchBoxFocus($event)"
+              (ionInput)="searchBoxInput($event)"
+              (ionClear)="searchBoxClear($event)">
+            </ion-searchbar>
+        </ion-col>
+    </ion-row>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list [virtualScroll]="listAllItemCards">
+  <ion-list [virtualScroll]="listAllItemCardsSearch">
     <ion-item-sliding *virtualItem="let item">
       <ion-item >
         <ion-card class="productCard" (click)="productClicked(item)" >

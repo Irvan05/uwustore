@@ -7,7 +7,9 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Menu Utama</ion-title>
+    <ion-title *ngIf="belumLogin=='true'">Login</ion-title>
+    <ion-title *ngIf="belumLogin=='false'">Menu User</ion-title>
+    <ion-title *ngIf="belumLogin=='admin'">Menu Admin</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -32,22 +34,22 @@
   <section >
     <ion-list *ngIf="belumLogin=='false'">
       <button ion-item (click)="openUserOrderHistoryPage()" icon-right>
-        Lihat status pesanan
+        Lihat Status Pesanan
         <ion-icon name="arrow-forward"  item-right></ion-icon>
       </button>
       <button ion-item (click)="openRatingPage()" icon-right> 
-          Review rating produk
+          Review Rating Produk
           <ion-icon name="arrow-forward"  item-right></ion-icon>
       </button>
       <button ion-item (click)="openEditUserPage()" icon-right>
-          Edit profil
+          Edit Profil
           <ion-icon name="arrow-forward"  item-right></ion-icon>
       </button>
     </ion-list>
 
     <ion-list *ngIf="belumLogin=='admin'">
       <button ion-item (click)="openTambahProdukPage()"icon-right>
-          Tambah produk
+          Tambah Produk
         <ion-icon name="arrow-forward"  item-right></ion-icon>
       </button>
       <button ion-item (click)="openEditProductPage()" icon-right> 
@@ -55,7 +57,7 @@
           <ion-icon name="arrow-forward"  item-right></ion-icon>
       </button>
       <button ion-item (click)="openEditUserPage()" icon-right>
-          Edit profil
+          Edit Profil
           <ion-icon name="arrow-forward"  item-right></ion-icon>
       </button>
     </ion-list>

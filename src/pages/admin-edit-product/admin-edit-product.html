@@ -22,6 +22,12 @@
             </ion-item>
             <ion-item>
               <ion-label floating>Kategori</ion-label>
+              <ion-select>
+                <ion-option *ngFor="let item of category" (ionSelect)="categorySelect(item)" value={{item}}>{{item}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Kategori</ion-label>
               <ion-input type="text" formControlName="kategori" value={{product.category}}></ion-input>
             </ion-item>
             <ion-item>
@@ -49,6 +55,7 @@
             </ion-list>
             <button ion-button [disabled]="!editProductForm.valid" type="submit">update info barang</button>
           </form>
+          <button ion-button (click)="hapusBarangClick()" >Hapus barang</button>
           <button ion-button (click)="uploadPhoto()">upload poto barang</button>
           <button ion-button (click)="sourcePhoto()">ambil poto</button>
   

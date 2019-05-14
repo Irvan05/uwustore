@@ -108,7 +108,7 @@ export class ProfilePage {
                 // });
                 let alertc = this.alertCtrl.create({
                   title: 'Login sukses',
-                  subTitle: "Silakan pindah ke halaman login",
+                  //subTitle: "Silakan pindah ke halaman login",
                   buttons:[
                     {
                       text: 'Kembali',

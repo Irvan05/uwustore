@@ -1,6 +1,6 @@
 import { RemoteServiceProvider } from './../../providers/remote-service/remote-service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Platform } from 'ionic-angular';
 
 /**
  * Generated class for the ProdukDetailPage page.
@@ -23,12 +23,17 @@ export class ProdukDetailPage {
   constructor(public navCtrl: NavController, 
     private viewCtrl:ViewController,
     private provider: RemoteServiceProvider,
+    private platform: Platform,
     public navParams: NavParams) {
     this.item=this.navParams.get('data');
     // console.log(this.item);
     // console.log('item desc '+this.item.description);
     this.imageBasepath=provider.getImageBasepath();
     //this.title=this.item.desc;
+    this.platform.registerBackButtonAction(fn=>{
+      console.log("back pressed");
+      this.dismiss();
+    });
   }
 
   ionViewDidLoad() {

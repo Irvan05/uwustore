@@ -24,6 +24,14 @@ export class RemoteServiceProvider {
     }
   }
 
+  getAllCategory(){
+    return this.http.get(`${this.basepath}code=20`);
+  }
+
+  deleteProduct(myData){
+    return this.http.post(`${this.basepath}code=19`, myData)
+  }
+
   getTansactionOrderDetails(myData){
     return this.http.post(`${this.basepath}code=18`, myData)
   }
@@ -72,6 +80,14 @@ export class RemoteServiceProvider {
     return this.http.post(`${this.basepath}code=10`, myData)
   }
 
+  updateOrderHargaTotal(myData){
+    return this.http.post(`${this.basepath}code=22`, myData)
+  }
+
+  updateOrderDaftarBarang(myData){
+    return this.http.post(`${this.basepath}code=23`, myData)
+  }
+
   tambahProduk(myData:any){
     return this.http.post(`${this.basepath}code=5`, myData);
   }
@@ -91,6 +107,10 @@ export class RemoteServiceProvider {
   getAllProduct(){
     //console.log(this.basepath);
     return this.http.get(`${this.basepath}code=6`);
+  }
+
+  getSpecificProduct(myData){
+    return this.http.post(`${this.basepath}code=21`, myData);
   }
 
   // checkUpdateTeros(){

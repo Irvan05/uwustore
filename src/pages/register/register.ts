@@ -98,7 +98,7 @@ export class RegisterPage {
           let alertc = this.alertCtrl.create({
             title: 'Registrasi sukses',
             //subTitle: "Silakan pindah ke halaman login",
-            subTitle:this.data,
+            //subTitle:this.data,
             buttons:[
               {
                 text: 'Kembali',

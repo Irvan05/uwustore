@@ -20,10 +20,18 @@
             <ion-label floating>Nama Produk</ion-label>
             <ion-input type="text" formControlName="nama"></ion-input>
           </ion-item>
-          <ion-item>
-            <ion-label floating>Kategori</ion-label>
-            <ion-input type="text" formControlName="kategori"></ion-input>
-          </ion-item>
+          <!-- <ion-list radio-group> -->
+            <ion-item>
+              <ion-label floating>Kategori</ion-label>
+              <ion-select>
+                <ion-option *ngFor="let item of category" (ionSelect)="categorySelect(item)" value={{item}}>{{item}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Kategori</ion-label>
+              <ion-input type="text"  formControlName="kategori" value={{selectedCategory}}></ion-input>
+            </ion-item>
+          <!-- </ion-list> -->
           <ion-item>
             <ion-label floating>Harga</ion-label>
             <ion-input type="number" formControlName="harga"></ion-input>
@@ -62,6 +70,7 @@
 
 
         <img src={{image}} *ngIf="image"/>
+        <!-- <img src="http://www.kroptokon.com/kroptokon.com/warmat/uploads/Nuvo%20family%2076gr.jpg"/> -->
         <!-- <ion-card>
           <ion-card-header>
             Response

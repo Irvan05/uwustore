@@ -19,7 +19,7 @@
                 </ion-searchbar>
             </ion-col>
             <ion-col col-2>
-                <button (click)="cartButtonClicked()" style="background-color:rgb(52, 130, 202);" ion-button>
+                <button (click)="cartButtonClicked()" color='secondary' ion-button>
                   <div>
                       <ion-icon name="basket" style="margin-top:5px;">
                         <ion-badge id="notifications-badge" color="danger">{{itemCount}}</ion-badge>
@@ -46,55 +46,81 @@
   </ion-header>
 
 <ion-content no-padding>
-    <ion-grid no-padding justify-content-center >
-      <ion-row justify-content-center text-center>
-      <!-- <ion-list [virtualScroll]="listFiltereditemCardsName">
+    <!-- <ion-grid no-padding justify-content-center >
+      <ion-row justify-content-center text-center> -->
+      <ion-list [virtualScroll]="listFiltereditemCardsName">
       <ion-item-sliding *virtualItem="let item">
-      <ion-item> -->
-        <ion-col justify-content-center>
-        <!-- <div col-12 col-xl-2 col-lg-3 col-md-4 justify-content-center>  -->
+      <ion-item>
+        <!-- <ion-col justify-content-center> -->
+        
 
-          <ion-card *ngFor="let item of listFiltereditemCardsName">
+          <!-- <ion-card *ngFor="let item of listFiltereditemCardsName"> -->
+          <!-- <ion-card>
 
-              <img (click)="itemCardClick(item)" src="{{imageBasepath}}{{item.photo}}"/>
+            <img (click)="itemCardClick(item)" src="{{imageBasepath}}{{item.photo}}"/>
 
-              <ion-card-content no-padding>
-                <ion-card-title no-padding >
-                  <p class="ellipsis2">
-                    {{ item.name }}
-                  </p>
-                  </ion-card-title>
-                  <ion-grid no-padding class="product_grid">
-                  <ion-row no-padding>
-                      <p style="color: rgb(255, 0, 0);">
-                          {{item.price | currency:"Rp ":false:"1.0" }}
-                      </p>
-                  </ion-row>
-                  <ion-row no-padding class="beli_row2">
-                    <ion-col no-padding col-6 style='color: orange; text-align: left; margin-top: 0.8vh; margin-left: 0px;'>
-                        {{item.stock==0 ? 'Habis' : 'tersedia'}}
-                    </ion-col>
-                    <ion-col no-padding col-6>
-                      <button col-12 ion-button (click)="buyClicked(item)" clear small color="secondary" icon-start>
-                        <ion-icon name='cart'></ion-icon>
-                        Beli
-                      </button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-          </ion-card>
-        <!-- </div> -->
-        </ion-col>
-      <!-- </ion-item>
+            <ion-card-content no-padding>
+              <ion-card-title no-padding >
+                <p class="ellipsis2">
+                  {{ item.name }}
+                </p>
+                </ion-card-title>
+                <ion-grid no-padding class="product_grid">
+                <ion-row no-padding>
+                    <p style="color: rgb(255, 0, 0);">
+                        {{item.price | currency:"Rp ":false:"1.0" }}
+                    </p>
+                </ion-row>
+                <ion-row no-padding class="beli_row2">
+                  <ion-col no-padding col-6 style='color: orange; text-align: left; margin-top: 0.8vh; margin-left: 0px;'>
+                      {{item.stock==0 ? 'Habis' : 'tersedia'}}
+                  </ion-col>
+                  <ion-col no-padding col-6>
+                    <button col-12 ion-button (click)="buyClicked(item)" clear small color="secondary" icon-start>
+                      <ion-icon name='cart'></ion-icon>
+                      Beli
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card> -->
+
+          <ion-row>
+              <ion-col col-5>
+                  <img src="{{imageBasepath}}{{item.photo}}" />
+              </ion-col>
+              <ion-col col-7>
+                <ion-row class="prod_name" text-wrap>
+                  {{item.name}}
+                </ion-row>
+                <ion-row style="color:red; margin-top: 8px; border-bottom: 1px solid rgba(121, 121, 121, 0.356) !important;">
+                    {{item.price | currency:"Rp ":false:"1.0" }}
+                </ion-row>
+                <ion-row no-padding class="beli_row2" style="margin-top: 8px;">
+                  <ion-col no-padding col-6 style='color: orange; text-align: left; margin-top: 0.8vh; margin-left: 0px;'>
+                      {{item.stock==0 ? 'Habis' : 'tersedia'}}
+                  </ion-col>
+                  <ion-col no-padding col-6>
+                    <button col-12 ion-button (click)="buyClicked(item)" clear small color="secondary" icon-start>
+                      <ion-icon name='cart'></ion-icon>
+                      Beli
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+
+        <!-- </ion-col> -->
+      </ion-item>
       </ion-item-sliding>
-      </ion-list> -->
-      </ion-row>
-    </ion-grid>
+      </ion-list>
+      <!-- </ion-row>
+    </ion-grid> -->
   </ion-content>
 
   <ion-footer no-padding>
-          <button col-12 ion-button (click)="selectCategory()" small >
+          <button col-12 ion-button round color="secondary" (click)="selectCategory()" small >
               Pilih kategori
           </button>
   </ion-footer>

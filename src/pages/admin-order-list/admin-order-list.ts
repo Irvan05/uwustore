@@ -169,6 +169,7 @@ export class AdminOrderListPage {
         alert('Connection failed');
     }
     */
+   console.log("asdasdsad");
 
     this.pushBackgroundAdminOnly();
 

@@ -30,6 +30,10 @@ export class TambahProdukPage {
   loading:any;
   itemStatus:string="available";
   //reader = new FileReader();
+  
+  category:Array<String>;
+  selectedCategory:string;
+  //categoryInputDisable:boolean=false;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -78,7 +82,8 @@ export class TambahProdukPage {
       category: this.addProductForm.value.kategori,
       stock: this.addProductForm.value.stok,
       photo: this.addProductForm.value.nama+".jpg"
-    })
+    });
+    console.log(uploadData);
     if(this.image==""||this.image==null){
       this.loading.dismiss();
       alert("Belum ada gambar");
@@ -99,6 +104,7 @@ export class TambahProdukPage {
         {//0
           text: 'Album',
           handler: () => {
+            //this.ambilPoto(0);
             this.ambilPoto(0);
             console.log('0 clicked');
           }
@@ -106,6 +112,7 @@ export class TambahProdukPage {
         {//1
           text: 'Kamera',
           handler: () => {
+            //this.ambilPoto(1);
             this.ambilPoto(1);
             console.log('1 clicked');
           }
@@ -122,11 +129,55 @@ export class TambahProdukPage {
     alertc.present();
   }
 
+  // photoQuality(sourceType:number){
+  //   var alertc = this.alertCtrl.create({
+  //     title: 'Kualitas Foto',
+  //     buttons: [
+  //       {//0
+  //         text: '50',
+  //         handler: () => {
+  //           this.ambilPoto(sourceType,50);
+  //           console.log('0 clicked');
+  //         }
+  //       },
+  //       {//1
+  //         text: '75',
+  //         handler: () => {
+  //           this.ambilPoto(sourceType,75);
+  //           console.log('1 clicked');
+  //         }
+  //       },
+  //       {//1
+  //         text: '85',
+  //         handler: () => {
+  //           this.ambilPoto(sourceType,85);
+  //           console.log('1 clicked');
+  //         }
+  //       },
+  //       {//1
+  //         text: '95',
+  //         handler: () => {
+  //           this.ambilPoto(sourceType,95);
+  //           console.log('1 clicked');
+  //         }
+  //       },
+  //       {
+  //         text: '100',
+  //         handler: () => {
+  //           this.ambilPoto(sourceType,100);
+  //           console.log('Cancel clicked');
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   alertc.present();
+  // }
+
   ambilPoto(sourceType:number){
     // this.presentLoading();
     
     const cameraOptions: CameraOptions = {
-      quality: 50,
+      quality: 75,
       targetWidth:  480,
       targetHeight: 800,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -235,15 +286,13 @@ export class TambahProdukPage {
         this.asd.response = data["_body"];
         this.loading.dismiss();
         alert("upload data success");
-        this.addProductForm.reset;
-        this.addProductForm=this.formBuilder.group({
-          nama: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-          kategori: ['', Validators.required],
-          harga: ['', Validators.required],
-          deskripsi: ['', Validators.required],
-          stok: ['', Validators.required]
-        });
-    }).catch(this.handleError);
+        this.navCtrl.pop();
+    }).catch(err=>{
+      console.log('error');
+      console.log(err);
+      this.loading.dismiss();
+      alert("upload data failed");
+    });
     /*
     ,
     (error: any) => {
@@ -255,11 +304,50 @@ export class TambahProdukPage {
     */
   }
 
-  private handleError(error: any) {
-    console.log('error');
-    console.log(error);
-    this.loading.dismiss();
-    alert("upload data failed");
+  // private handleError(error: any) {
+  //   console.log('error');
+  //   console.log(error);
+  //   this.loading.dismiss();
+  //   alert("upload data failed");
+  // }
+
+  categorySelect(data){
+    this.selectedCategory=data;
+    if(data=="Kategori baru"){
+      //console.log("false");
+      this.selectedCategory="";
+      //this.categoryInputDisable=true;
+    }
+  }
+
+  ngOnInit(){
+    this.provider.getAllCategory().toPromise().then((result) => {
+      var cat=JSON.parse(result["_body"]);
+      //console.log(cat);
+      if(cat==[]||cat==null||cat==undefined){
+        this.category=new Array<string>();
+        this.category.sort();
+        this.category.unshift("Kategori baru");
+        return;
+      }
+      this.category=new Array<string>();
+      cat.forEach(element => {
+        try{
+          this.category.push(element.category);
+        }
+        catch(err) {
+          this.category.unshift(element.category);
+        }
+      });
+      this.category.sort();
+      this.category.unshift("Kategori baru");
+      //console.log(this.category);
+    }).catch(err=>{
+      console.log('error');
+      console.log(err);
+      this.loading.dismiss();
+      alert("connection failed");
+    });
   }
 
   ionViewDidLoad() {

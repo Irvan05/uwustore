@@ -1,3 +1,4 @@
+
 import { RemoteServiceProvider } from './../providers/remote-service/remote-service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -39,6 +40,7 @@ import { AdminEditProductPage } from './../pages/admin-edit-product/admin-edit-p
 import { AdminOrderDetailPage } from '../pages/admin-order-detail/admin-order-detail';
 import { UserOrderDetailPage } from './../pages/user-order-detail/user-order-detail';
 import { AboutAppPage } from './../pages/about-app/about-app';
+import { AdminSwapProductPage } from './../pages/admin-swap-product/admin-swap-product';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { AboutAppPage } from './../pages/about-app/about-app';
     AdminEditProductPage,
     AdminOrderDetailPage,
     UserOrderDetailPage,
-    AboutAppPage
+    AboutAppPage,
+    AdminSwapProductPage
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ import { AboutAppPage } from './../pages/about-app/about-app';
     AdminEditProductPage,
     AdminOrderDetailPage,
     UserOrderDetailPage,
-    AboutAppPage
+    AboutAppPage,
+    AdminSwapProductPage
   ],
   providers: [
     StatusBar,

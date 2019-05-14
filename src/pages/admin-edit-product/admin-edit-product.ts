@@ -3,7 +3,7 @@ import { FileTransfer, FileTransferObject, FileUploadOptions } from '@ionic-nati
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ModalController, ViewController } from 'ionic-angular';
 import { EditPhotoPage } from '../edit-photo/edit-photo';
 
 /**
@@ -31,6 +31,9 @@ export class AdminEditProductPage {
 
   itemStatCount:number=10;
   zone:any;
+  
+  category:Array<String>;
+  selectedCategory:string;
 
   constructor(public navCtrl: NavController, 
     public formBuilder: FormBuilder,
@@ -40,6 +43,7 @@ export class AdminEditProductPage {
     public loadingCtrl:LoadingController,
     public provider: RemoteServiceProvider,
     public modalCtrl: ModalController,
+    private viewCtrl:ViewController,
     private _zone: NgZone,
     public navParams: NavParams) {
       this.editProductForm=this.formBuilder.group({
@@ -129,7 +133,7 @@ export class AdminEditProductPage {
     //this.presentLoading();
     
     const cameraOptions: CameraOptions = {
-      quality: 50,
+      quality: 75,
       targetWidth:  480,
       targetHeight: 800,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -193,9 +197,52 @@ export class AdminEditProductPage {
     }
   }
 
+  hapusBarangClick(){
+    var alertc= this.alertCtrl.create({
+      title: "Hapus produk?",
+      buttons: [
+        {
+          text: 'Ya',
+          handler: () => {
+            console.log('ya clicked');
+            this.hapusBarang();
+          }
+        },{
+          text: 'Tidak',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    alertc.present();
+  }
+
+  hapusBarang(){
+    var uploadData= JSON.stringify({
+      id_product: this.product.id_product
+    });
+    this.provider.deleteProduct(uploadData)
+    .toPromise().then((data) => {
+        //console.log(data);
+        alert("Produk dihapus");
+        this.viewCtrl.dismiss();
+    }).catch(this.handleError);
+  }
+
   radioChecked(data){
     //console.log("barang "+data);
     this.itemStatCount=data;
+  }
+
+  categorySelect(data){
+    this.product.category=data;
+    if(data=="Kategori baru"){
+      //console.log("false");
+      this.product.category="";
+      //this.categoryInputDisable=true;
+    }
   }
 
   ngOnInit(){
@@ -203,6 +250,33 @@ export class AdminEditProductPage {
     this.oldPhoto=this.product.photo;
     this.image=this.imageBasepath+this.product.photo;
     this.oldImage=this.imageBasepath+this.product.photo;
+    this.provider.getAllCategory().toPromise().then((result) => {
+      var cat=JSON.parse(result["_body"]);
+      //console.log(cat);
+      if(cat==[]||cat==null||cat==undefined){
+        this.category=new Array<string>();
+        this.category.sort();
+        this.category.unshift("Kategori baru");
+        return;
+      }
+      this.category=new Array<string>();
+      cat.forEach(element => {
+        try{
+          this.category.push(element.category);
+        }
+        catch(err) {
+          this.category.unshift(element.category);
+        }
+      });
+      this.category.sort();
+      this.category.unshift("Kategori baru");
+      //console.log(this.category);
+    }).catch(err=>{
+      console.log('error');
+      console.log(err);
+      this.loading.dismiss();
+      alert("connection failed");
+    });
   }
 
   private handleError(error: any) {

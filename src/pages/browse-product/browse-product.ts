@@ -209,13 +209,15 @@ export class BrowseProductPage {
   }
 
   ngOnInit(){
-    this.listAllItemCards=this.navParams.get('listCard');
-    this.itemCount=this.navParams.get("itemCount");
-    this.listItemCart=this.navParams.get("listCart");
-    this.callback=this.navParams.get("callback");
-    this.listFiltereditemCardsCategory=this.listAllItemCards;
-    this.listFiltereditemCardsName=this.listAllItemCards;
-    this.listFiltereditemCardsName.sort(function(a, b) {
+    //this.listAllItemCards=this.navParams.get('listCard');
+    this.provider.getAllProduct().toPromise().then((result) => {
+      this.listAllItemCards=JSON.parse(result["_body"]);
+      this.itemCount=this.navParams.get("itemCount");
+      this.listItemCart=this.navParams.get("listCart");
+      this.callback=this.navParams.get("callback");
+      this.listFiltereditemCardsCategory=this.listAllItemCards;
+      this.listFiltereditemCardsName=this.listAllItemCards;
+      this.listFiltereditemCardsName.sort(function(a, b) {
       var nameA = a.name.toUpperCase(); // ignore upper and lowercase
       var nameB = b.name.toUpperCase(); // ignore upper and lowercase
       if (nameA < nameB) {
@@ -238,6 +240,12 @@ export class BrowseProductPage {
     this.category.sort();
     console.log("categori:");
     console.log(this.category);
+    }).catch((error) => {
+      console.error('An error occurred', error);
+      console.log('error');
+      console.log(error);
+    });
+    
     //console.log(temp);
   }
 
@@ -254,7 +262,7 @@ export class BrowseProductPage {
 
   selectCategory(){
     this.alertc=this.alertCtrl.create({
-      title: 'Pilih kategory',
+      title: 'Pilih kategori',
       // inputs:[
       //   {
       //     label:"Semua",
